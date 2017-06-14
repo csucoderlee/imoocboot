@@ -15,3 +15,7 @@ git log: 属性配置和不同环境部署配置
 默认配置文件 application.properties, 推荐application.yml， 冒号后面空一个位置
 
 ## 不同环境不同配置
+
+## @Controller注解结合模板 mythemleaf使用
+
+## controller中参数的获取
