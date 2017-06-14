@@ -19,3 +19,5 @@ git log: 属性配置和不同环境部署配置
 ## @Controller注解结合模板 mythemleaf使用
 
 ## controller中参数的获取
+
+## mysql + jpa集成
