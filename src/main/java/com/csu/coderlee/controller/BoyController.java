@@ -3,8 +3,10 @@ package com.csu.coderlee.controller;
 import com.csu.coderlee.domain.Boy;
 import com.csu.coderlee.repository.BoyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -25,6 +27,14 @@ public class BoyController {
     public Boy boyAdd(@RequestParam("age") Integer age){
         Boy boy = new Boy();
         boy.setAge(age);
+        return boyRepository.save(boy);
+    }
+
+    @PostMapping(value = "/object/boys")
+    public Boy boyAddByObject(@Valid Boy boy, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return null;
+        }
         return boyRepository.save(boy);
     }
 
