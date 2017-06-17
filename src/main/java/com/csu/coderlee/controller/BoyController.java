@@ -1,7 +1,9 @@
 package com.csu.coderlee.controller;
 
 import com.csu.coderlee.domain.Boy;
+import com.csu.coderlee.domain.Result;
 import com.csu.coderlee.repository.BoyRepository;
+import com.csu.coderlee.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +33,21 @@ public class BoyController {
     }
 
     @PostMapping(value = "/object/boys")
-    public Boy boyAddByObject(@Valid Boy boy, BindingResult bindingResult){
+    public Result<Boy> boyAddByObject(@Valid Boy boy, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            return null;
+
+//            Result result = new Result();
+//            result.setCode(1);
+//            result.setMsg(bindingResult.getFieldError().getDefaultMessage());
+//            return result;
+            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
-        return boyRepository.save(boy);
+
+        Result result = new Result();
+        result.setCode(0);
+        result.setMsg("success");
+        result.setData(boyRepository.save(boy));
+        return result;
     }
 
     @GetMapping(value = "/boys/{id}")
