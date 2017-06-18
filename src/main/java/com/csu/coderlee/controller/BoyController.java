@@ -1,5 +1,7 @@
 package com.csu.coderlee.controller;
 
+import com.csu.coderlee.Exception.BoyException;
+import com.csu.coderlee.Exception.ExceptionEnum;
 import com.csu.coderlee.domain.Boy;
 import com.csu.coderlee.domain.Result;
 import com.csu.coderlee.repository.BoyRepository;
@@ -52,7 +54,12 @@ public class BoyController {
 
     @GetMapping(value = "/boys/{id}")
     public Boy boyFindOne(@PathVariable("id") Integer id) {
-        return boyRepository.findOne(id);
+        Boy boy = boyRepository.findOne(id);
+
+        if (boy.getAge() < 18) {
+            throw new BoyException(ExceptionEnum.UNKOWN_ERROR);
+        }
+        return boy;
     }
 
     //xxx-form

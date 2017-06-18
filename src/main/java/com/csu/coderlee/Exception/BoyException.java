@@ -14,6 +14,11 @@ public class BoyException extends RuntimeException {
         this.code = code;
     }
 
+    public BoyException(ExceptionEnum exceptionEnum) {
+        super(exceptionEnum.getMessage());
+        this.code = exceptionEnum.getCode();
+    }
+
     public Integer getCode() {
         return code;
     }
